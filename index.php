@@ -3,6 +3,10 @@ session_start();
 include('inc/koneksi.php');
 require 'function.php';
 
+$user = $db->prepare("SELECT * FROM tb_user where id_user='$_SESSION[id]'");
+$user->execute();
+$m = $user->fetch();
+
 if(isset($_POST['login'])){
     if(login($_POST)>0){
 
@@ -276,7 +280,7 @@ if(isset($_POST['hapus'])){
                                     <form action="" method="post">
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <a class="btn btn-warning" href="updateprofil.php">Edit Profil</a>
+                                                <a class="btn btn-warning" href="profil.php?id=<?= $m['id_user']?>">Edit Profil</a>
                                             </div>
                                             <label for="">Keluar dari akun<a class=""
                                                     href="logout.php">Logout</a></label>

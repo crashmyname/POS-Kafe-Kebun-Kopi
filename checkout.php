@@ -491,7 +491,7 @@ $s = $user->fetch();
                                                     ?>
                                                                                 <input type="hidden" name="menu[]" value="<?= $menu['id_menu']?>">
                                                                                 <input type="hidden" name="hrg[]" value="<?= $menu['harga']?>">
-                                                                                <input type="text" name="jml[<?= $menu['id_menu']?>]" value="<?= $_SESSION['keranjang'][$menu['id_menu']]?>">
+                                                                                <input type="hidden" name="jml[<?= $menu['id_menu']?>]" value="<?= $_SESSION['keranjang'][$menu['id_menu']]?>">
                                                                                 <input type="hidden" name="totalharga" value="<?= $total?>">
                                                                                 <input type="hidden" name="time" value="<?php 
 date_default_timezone_set('Asia/Jakarta'); // Zona Waktu indonesia

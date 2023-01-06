@@ -45,6 +45,7 @@ function login($data){
     if($row > 0){
         $_SESSION['auth'] = 1;
         $_SESSION['user'] = $username;
+        $_SESSION['id'] = $cek['id_user'];
             // echo "Berhasil Login";
             // echo "<script>document.location='home.php';</script>";
         }else{
@@ -128,6 +129,8 @@ function finishtransaksi($data){
         $sql = "INSERT INTO tb_pembayaran values ('','$idPesanan',now(),'$totalharga','$user','Pending','$image')";
         $transaksi = $db->prepare($sql);
         $transaksi->execute();
+        $meja = $db->prepare("UPDATE tb_meja set statusmeja='Booking' where id_meja='$meja'");
+        $meja->execute();
         // var_dump($transaksi);
     }else{
         echo "Gagal simpan";
@@ -222,5 +225,34 @@ function delcart($id){
     if($scart){
         echo "<script>document.location='../index.php';</script>";
         }
+}
+
+function profil($data){
+    $db = koneksi();
+    $id = $data['uid'];
+    $name = $data['nama'];
+    $user = $data['username'];
+    $passl = md5($data['passlama']);
+    $pass = md5($data['passbaru']);
+
+    $passlama = $db->prepare("SELECT * FROM tb_user where id_user='$id'");
+    $passlama->execute();
+    $pl = $passlama->fetch();
+    $p = $pl['password'];
+    if($passl == $p){
+    $sql = "UPDATE tb_user set nm_user='$name',username='$user',password='$pass' where id_user='$id'";
+    $result = $db->prepare($sql);
+    $result->execute();
+    }else{
+        $_SESSION['errors'] = 'Data Gagal Diubah Karena Password yang anda masukkan tidak sesuai'; 
+    }
+    if($result){
+        $_SESSION['update'] = 'Data berhasil diubah';
+        // echo "<script>document.location='kategori.php';</script>";
+    }
+    else{
+        $_SESSION['errorupdate'] = 'Data Gagal Diubah';
+        // echo "<script>document.location='kategori.php';</script>";
+    }
 }
 ?>

@@ -163,10 +163,10 @@ $no = 1;
                                             </div>
                                         </div>
 
-                                        <button type="button" class="btn btn-primary me-auto float-end mb-2 mt-2"
+                                        <button type="button" class="btn btn-success me-auto float-end mb-2 mt-2"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal1<?=$p['id_pembayaran']?>">
-                                            <i class="bi bi-info-circle"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                             </span>
                                         </button>
                                         <!-- Modal -->
