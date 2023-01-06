@@ -54,8 +54,8 @@ $no = 1;
                                     <th>ID Pesanan</th>
                                     <th>Tanggal Pesanan</th>
                                     <th>Total bayar</th>
-                                    <!-- <th>Total Item</th> -->
                                     <th>Status Transaksi</th>
+                                    <th>Update Konfirmasi</th>
                                     <th>Bukti Transaksi</th>
                                     <th>Action</th>
                                 </tr>
@@ -70,13 +70,19 @@ $no = 1;
                                     <th><?= $p['id_pesanan']?></th>
                                     <th width="15%"><?= $p['tgl_bayar']?></th>
                                     <th><?= $p['total_bayar']?></th>
-                                    <!-- <th><?= $p['jumlah']?></th> -->
+                                    <th><?php 
+                                    if($p['status']=='Selesai'){
+                                    ?>
+                                    <button class="btn btn-success"><?= $p['status']?></button>
+                                    <?php }else{?>
+                                    <button class="btn btn-warning"><?= $p['status']?></button> 
+                                    <?php } ?></th>
                                     <th width="20%">
                                         <div class="col-md-8 form-group">
                                             <form action="status.php" method="post">
                                                 <input type="hidden" value="<?= $p['id_pembayaran'] ?>" name="idp">
                                                 <select type="text" name="status" id="kategori"
-                                                    class="form-control btn btn-info" onchange="form.submit()" required>
+                                                    class="form-control" onchange="form.submit()" required>
                                                     <option value="<?= $p['status']?>"><?= $p['status']?></option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="Selesai">Selesai</option>
