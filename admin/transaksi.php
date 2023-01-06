@@ -3,8 +3,6 @@ $page = "Transaksi";
 include('a_header.php');
 // include('../inc/koneksi.php');
 
-$transaksi = $db->prepare("SELECT * FROM tb_pembayaran inner join tb_pesanan on tb_pesanan.id_pesanan=tb_pembayaran.id_pesanan");
-$transaksi->execute();
 $no = 1;
 ?>
 <!-- main -->
@@ -61,7 +59,9 @@ $no = 1;
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
+                                <?php                 
+                                $transaksi = $db->prepare("SELECT DISTINCT a.id_pesanan,a.nm_user,a.tgl_bayar,a.total_bayar,a.status,a.bukti_transaksi,a.id_pembayaran FROM tb_pembayaran a inner join tb_pesanan b on a.id_pesanan = b.id_pesanan");
+                                $transaksi->execute();
                                 while($p = $transaksi->fetch()){
                                 ?>
                                 <tr align="center">
@@ -73,16 +73,16 @@ $no = 1;
                                     <th><?php 
                                     if($p['status']=='Selesai'){
                                     ?>
-                                    <button class="btn btn-success"><?= $p['status']?></button>
-                                    <?php }else{?>
-                                    <button class="btn btn-warning"><?= $p['status']?></button> 
-                                    <?php } ?></th>
+                                        <button class="btn btn-success"><?= $p['status']?></button>
+                                        <?php }else{?>
+                                        <button class="btn btn-warning"><?= $p['status']?></button>
+                                        <?php } ?></th>
                                     <th width="20%">
                                         <div class="col-md-8 form-group">
                                             <form action="status.php" method="post">
                                                 <input type="hidden" value="<?= $p['id_pembayaran'] ?>" name="idp">
-                                                <select type="text" name="status" id="kategori"
-                                                    class="form-control" onchange="form.submit()" required>
+                                                <select type="text" name="status" id="kategori" class="form-control"
+                                                    onchange="form.submit()" required>
                                                     <option value="<?= $p['status']?>"><?= $p['status']?></option>
                                                     <option value="Pending">Pending</option>
                                                     <option value="Selesai">Selesai</option>
@@ -92,10 +92,81 @@ $no = 1;
                                     </th>
                                     <th><?= "<img src='img/produk/$p[bukti_transaksi]' class='rounded' width='25%'>"?>
                                     </th>
-                                    <th> <button type="button" class="btn btn-primary me-auto float-end mb-2 mt-2"
+                                    <th>
+                                        <button type="button" class="btn btn-primary me-auto float-end mb-2 mt-2"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal2<?=$p['id_pesanan']?>">
+                                            <i class="bi bi-info-circle"></i>
+                                            </span>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal2<?=$p['id_pesanan']?>" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg transparen">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Item
+                                                            Pesanan</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="" method="post" enctype="multipart/form-data">
+                                                        <div class="modal-body">
+                                                            <!-- Table head options start -->
+                                                            <section class="section">
+                                                                <div class="row" id="table-head">
+                                                                    <div class="col-12">
+                                                                        <div class="card">
+                                                                            <div class="card-content">
+                                                                                <div class="card-body">
+                                                                                    <p>Detail Item Pesanan
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped"
+                                                                                        id="table1" width="100%"
+                                                                                        cellspacing="0">
+                                                                                        <thead>
+                                                                                            <tr align="center">
+                                                                                                <th>Nama Menu</th>
+                                                                                                <th>Harga</th>
+                                                                                                <th>Jumlah</th>
+                                                                                                <!-- <th>Item</th> -->
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <?php
+                                                    $detail = $db->prepare("SELECT * FROM tb_itempesanan inner join tb_menu on tb_menu.id_menu = tb_itempesanan.id_menu where id_pesanan='$p[id_pesanan]'");
+                                                    $detail->execute();
+                                                    while($d = $detail->fetch()){
+                                                    ?>
+                                                                                            <tr>
+                                                                                                <th><?= $d['nama_menu']?></th>
+                                                                                                <th><?= $d['harga']?></th>
+                                                                                                <th><?= $d['jumlah']?></th>
+                                                                                                <!-- <th><?= $d['id_item']?></th> -->
+                                                                                            </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                            </section>
+                                                            <!-- Table head options end -->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </Form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary me-auto float-end mb-2 mt-2"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal1<?=$p['id_pembayaran']?>">
-                                            Detail Bukti
+                                            <i class="bi bi-info-circle"></i>
                                             </span>
                                         </button>
                                         <!-- Modal -->

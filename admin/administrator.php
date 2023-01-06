@@ -36,7 +36,7 @@ include('a_header.php');
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Table Cover Page</h6>
-                    <a href="form_cover.php" class="btn btn-success float-right">Tambah</a>
+                    <!-- <a href="form_cover.php" class="btn btn-success float-right">Tambah</a> -->
 
                 </div>
                 <div class="card-body">

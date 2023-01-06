@@ -100,18 +100,25 @@ function finishtransaksi($data){
             $queryProduk = $db->prepare("SELECT * FROM tb_menu where id_menu='$idmenu'");
             $queryProduk->execute();
             $produk = $queryProduk->fetch();
-            $total += ($produk['harga'] * $jml);
+            $jml = $_SESSION['keranjang'][$menu['id_menu']] = $value;
+            // $total += ($produk['harga'] * $jml);
             $queryItem = $db->prepare("INSERT INTO tb_itempesanan
-            values ('', '$idPesanan', '$menu', '$produk[harga]', '$jml')");
+            values ('', '$idPesanan', '$produk[id_menu]', '$produk[harga]','$jml')");
             $queryItem->execute();
             // $inserpesanan = $db->prepare("INSERT INTO tb_pemesanan values ('','$id[$idmenu]','$user[$idmenu]','$meja[$idmenu]','$menu[$idmenu]','$hrg[$idmenu]','$jml[$idmenu]','$tothrg[$idmenu]','$date[$idmenu]','Pending','Pending')");
             // $inserpesanan->execute();
         }
+        // foreach($data['jumlah'] as $id => $jumlah){
+        //     $jml = $_SESSION['keranjang'][$id] = $jumlah;
+        //     $queryItems = $db->prepare("UPDATE tb_itempesanan set jumlah='$jml' where id_menu='$idmenu'");
+        //     $queryItems->execute();
+        // }
         unset($_SESSION['keranjang']);
         echo "<script>alert('Transaksi Berhasil');</script>";
         echo "<script>document.location='index.php';</script>";
         // header('location:index.php');
         // var_dump($queryItem);
+        // var_dump($queryItems);
         // var_dump($queryPesanan);
         // print_r($queryItem);
         // print_r($queryPesanan);
@@ -121,7 +128,7 @@ function finishtransaksi($data){
         $sql = "INSERT INTO tb_pembayaran values ('','$idPesanan',now(),'$totalharga','$user','Pending','$image')";
         $transaksi = $db->prepare($sql);
         $transaksi->execute();
-        var_dump($transaksi);
+        // var_dump($transaksi);
     }else{
         echo "Gagal simpan";
     }
