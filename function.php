@@ -199,7 +199,6 @@ function uptransaksi($data){
 
 // }
 
-
 foreach($data['jumlah'] as $id => $jumlah){
     $_SESSION['keranjang'][$id] = $jumlah;
 }
