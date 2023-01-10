@@ -435,6 +435,62 @@ $s = $user->fetch();
                                 </div>
                             </div>
                         </div>
+                        <button type="button" class="btn btn-success me-auto float-end mb-2 mt-2"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal1">
+                                            <i class="bi bi-eye-fill"></i>QR Pembayaran
+                                            </span>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-md transparen">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Transaksi Melalui QR Pembayaran</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="" method="post" enctype="multipart/form-data">
+                                                        <div class="modal-body">
+                                                            <!-- Table head options start -->
+                                                            <section class="section">
+                                                                <div class="row" id="table-head">
+                                                                    <div class="col-12">
+                                                                        <div class="card">
+                                                                            <div class="card-content">
+                                                                                <div class="card-body">
+                                                                                    <p class="text-center fs-4"><b>OVO</b> 
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label></label>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <img src="admin/img/pembayaran/ovofix.jpg" class="mx-auto d-block" width="75%">
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label></label>
+                                                                                </div>
+                                                                                <div class="fs-3">
+                                                                                    <!-- <img src="admin/img/pembayaran/ovofix.jpg" class="mx-auto d-block" width="75%"> -->
+                                                                                    Transfer Mandiri : 9000043262949
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                            </section>
+                                                            <!-- Table head options end -->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </Form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            </div>
                         <button type="button" class="btn btn-primary me-auto float-end mb-2 mt-2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal1">
                             <i class="bi bi-cart4">Finish Transaksi</i><span class="badge bg-transparent">
