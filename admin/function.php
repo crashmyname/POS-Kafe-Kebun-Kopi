@@ -291,3 +291,17 @@ function deletecustomer($id){
         // echo "<script>document.location='customer.php';</script>";
     }
 }
+
+function updateadmin($data){
+    $db = koneksi();
+    $id = $data['uid'];
+    $user = $data['nmuser'];
+    $pass = $data['pass'];
+    
+    $admin = $db->prepare("UPDATE tb_admin set nm_user='$user',password='$pass' where uid='$id'");
+    if($admin->execute()){
+        $_SESSION['berhasil'] = 'Update Data Admin Berhasil';
+    }else{
+        $_SESSION['gagal'] = 'Gagal Melakukan Update';
+    }
+}

@@ -1,6 +1,12 @@
 <?php
 $page = "Admin";
 include('a_header.php');
+
+if(isset($_POST['updates'])){
+    if(updateadmin($_POST)>0){
+
+    }
+}
 ?>
 <!-- main -->
 <div id="main">
@@ -33,6 +39,13 @@ include('a_header.php');
             <h1 class="h3 mb-2 text-gray-800">Data Administrator</h1>
             <p class="mb-4">Berikut adalah halaman Administrator</p>
             <!-- DataTales Example -->
+            <?php if(isset($_SESSION['berhasil'])){?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php 
+                    echo $_SESSION['berhasil']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['berhasil']); }?>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Table Cover Page</h6>
@@ -55,10 +68,11 @@ include('a_header.php');
                                 <?php
                                 $admin = $db->prepare("SELECT * FROM tb_admin");
                                 $admin->execute();
+                                $no = 1;
                                 while($a = $admin->fetch()){
                                 ?>
                                 <tr align="center">
-                                    <th>1</th>
+                                    <th><?= $no?></th>
                                     <th><?= $a['nm_user']?></th>
                                     <th>@<?= $a['username']?></th>
                                     <th><?= $a['role']?></th>
@@ -122,14 +136,14 @@ include('a_header.php');
                                                                                                 class="form-control"
                                                                                                 name="username"
                                                                                                 value="<?= $a['username']?>"
-                                                                                                placeholder="Masukan Harga">
+                                                                                                readonly>
                                                                                         </div>
                                                                                         <div class="col-md-4">
                                                                                             <label>Password</label>
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-md-8 form-group">
-                                                                                            <input type="text"
+                                                                                            <input type="password"
                                                                                                 id="first-name"
                                                                                                 class="form-control"
                                                                                                 name="pass"
@@ -146,7 +160,7 @@ include('a_header.php');
                                                                                                 class="form-control"
                                                                                                 name="role"
                                                                                                 value="<?= $a['role']?>"
-                                                                                                placeholder="Masukan Stock Produk">
+                                                                                                >
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-sm-12 d-flex justify-content-end">
@@ -181,7 +195,7 @@ include('a_header.php');
                                         </div>
                                     </th>
                                 </tr>
-                                <?php }; ?>
+                                <?php $no++ ;} ?>
                             </tbody>
                         </table>
                     </div>
