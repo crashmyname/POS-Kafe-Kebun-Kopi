@@ -1,7 +1,7 @@
 <?php
 include('inc/koneksi.php');
     $id = $_POST['user'];
-    $meja = $_POST['meja'];
+    // $meja = $_POST['meja'];
     $date = $_POST['date'];
     $totbayar = $_POST['totbayar'];
     // $img1 = $data['foto1'];
@@ -16,6 +16,6 @@ include('inc/koneksi.php');
     }else{
         echo "Data Gagal diUpload";
 }
-var_dump($finish);
-print_r($finish);
+// var_dump($finish);
+// print_r($finish);
 ?>

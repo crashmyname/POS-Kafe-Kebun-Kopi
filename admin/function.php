@@ -2,7 +2,7 @@
 session_start();
 
 function koneksi(){
-    $db = new PDO('mysql:host=localhost;dbname=dbkafekebunkopi','root','');
+    $db = new PDO('mysql:host=localhost;dbname=dbtoko','root','');
     return $db;
 }
 
@@ -33,124 +33,11 @@ function logins($data){
     }
 }
 
-function addkategori($data){
-    $db = koneksi();
-    $catg = $data['kategori'];
-
-    $sql = "SELECT * FROM tb_kategori where nama_kategori='$catg'";
-    $data = $db->prepare($sql);
-    $data->execute();
-    $data1 = $data->rowCount();
-    // $data->fetch();
-    if($data1 > 0){
-        "Data Kategori sudah ada, tidak bisa melakukan input data yang sama";
-    }
-    else{
-        $query = "INSERT INTO tb_kategori values('','$catg')";
-        $datas = $db->prepare($query);
-        $datas->execute();
-        // var_dump($datas);
-        $_SESSION['status_berhasil'] = 'Data Kategori berhasil ditambah';
-        echo "<script>document.location='kategori.php';</script>";
-    }
-}
-
-function editkategori($data){
-    $db = koneksi();
-    $id = $data['id'];
-    $catg = $data['kategori'];
-    $sql = "UPDATE tb_kategori set nama_kategori='$catg' where id_kategori='$id'";
-    $result = $db->prepare($sql);
-    $result->execute();
-    if($result){
-        $_SESSION['update'] = 'Data berhasil diubah';
-        // echo "<script>document.location='kategori.php';</script>";
-    }
-    else{
-        $_SESSION['errorupdate'] = 'Data Gagal Diubah';
-        // echo "<script>document.location='kategori.php';</script>";
-    }
-}
-
-function deletekategori($id){
-    $db = koneksi();
-    $sql = "DELETE from tb_kategori where id_kategori='$id'";
-    $result = $db->prepare($sql);
-    $result->execute();
-    // var_dump($result);
-    if($result == true){
-        $_SESSION['deletecatg'] = 'Data berhasil dihapus';
-        echo "<script>document.location='../kategori.php';</script>";
-    }
-    else{
-        $_SESSION['errordelete'] = 'Data Gagal dihapus';
-        echo "<script>document.location='kategori.php';</script>";
-    }
-}
-
-function addmeja($data){
-    $db = koneksi();
-    $meja = $data['meja'];
-    $qty = $data['kapasitas'];
-
-    $sql = "SELECT * FROM tb_meja where no_meja='$meja'";
-    $data = $db->prepare($sql);
-    $data->execute();
-    $data1 = $data->rowCount();
-    // $data->fetch();
-    if($data1 > 0){
-        "Data Meja sudah ada, tidak bisa melakukan input data yang sama";
-    }
-    else{
-        $query = "INSERT INTO tb_meja values('','$meja','4','Available')";
-        $datas = $db->prepare($query);
-        $datas->execute();
-        // var_dump($datas);
-        $_SESSION['status_berhasil'] = 'Data Meja berhasil ditambah';
-        echo "<script>document.location='meja.php';</script>";
-    }
-}
-
-function editmeja($data){
-    $db = koneksi();
-    $id = $data['id'];
-    $meja = $data['meja'];
-    $kapasitas = $data['kapasitas'];
-    $status = $data['status'];
-    $sql = "UPDATE tb_meja set no_meja='$meja',kapasitas='$kapasitas',statusmeja='$status' where id_meja='$id'";
-    $result = $db->prepare($sql);
-    $result->execute();
-    if($result){
-        $_SESSION['update'] = 'Data berhasil diubah';
-        // echo "<script>document.location='kategori.php';</script>";
-    }
-    else{
-        $_SESSION['errorupdate'] = 'Data Gagal Diubah';
-        // echo "<script>document.location='kategori.php';</script>";
-    }
-}
-
-function deletemeja($id){
-    $db = koneksi();
-    $sql = "DELETE from tb_meja where id_meja='$id'";
-    $result = $db->prepare($sql);
-    $result->execute();
-    // var_dump($result);
-    if($result == true){
-        $_SESSION['deletecatg'] = 'Data berhasil dihapus';
-        echo "<script>document.location='../meja.php';</script>";
-    }
-    else{
-        $_SESSION['errordelete'] = 'Data Gagal dihapus';
-        echo "<script>document.location='meja.php';</script>";
-    }
-}
-
 function addproduk($data){
     $db = koneksi();
     $prod = $data['produk'];
     $jns = $data['jproduk'];
-    $catg = $data['kategori'];
+    // $catg = $data['kategori'];
     $hrg = $data['harga'];
     $stk = $data['stock'];
     $img1 = $_FILES['foto1']['name'];
@@ -170,7 +57,7 @@ function addproduk($data){
         "Data menu sudah ada, tidak bisa melakukan input data yang sama";
     }
     else{
-        $query = "INSERT INTO tb_menu values('','$prod','$jns','$catg','$hrg','$stk','$img1','$img2')";
+        $query = "INSERT INTO tb_menu values('','$prod','$jns','$hrg','$stk','$img1','$img2')";
         $results = $db->prepare($query);
         $results->execute();
         // var_dump($datas);
@@ -185,7 +72,7 @@ function editproduk($data){
     $id = $data['idmenu'];
     $prod = $data['menu'];
     $jns = $data['jproduk'];
-    $catg = $data['kategori'];
+    // $catg = $data['kategori'];
     $hrg = $data['harga'];
     $stk = $data['stock'];
     $img1 = $_FILES['foto1']['name'];
@@ -196,9 +83,11 @@ function editproduk($data){
     $uploaddata = move_uploaded_file($imgs1,$dirUpload.$img1);
     $uploaddata1 = move_uploaded_file($imgs2,$dirUpload.$img2);
     // if($uploaddata && $uploaddata1){
-    $sql = "UPDATE tb_menu set `nama_menu`='$prod', `jenis`='$jns', `id_kategori`='$catg', `harga`='$hrg', `stock_menu`='$stk' where `id_menu`='$id'";
+    $sql = "UPDATE tb_menu set `nama_menu`='$prod', `jenis`='$jns', `harga`='$hrg', `stock_menu`='$stk' where `id_menu`='$id'";
     $result = $db->prepare($sql);
     $result->execute();
+    // var_dump($result);
+    // print_r($result);
     if($img1 == ""){
         $fotolama = "SELECT * FROM tb_menu where id_menu='$id'";
         $lama = $db->prepare($fotolama);
@@ -296,7 +185,7 @@ function updateadmin($data){
     $db = koneksi();
     $id = $data['uid'];
     $user = $data['nmuser'];
-    $pass = $data['pass'];
+    $pass = md5($data['pass']);
     
     $admin = $db->prepare("UPDATE tb_admin set nm_user='$user',password='$pass' where uid='$id'");
     if($admin->execute()){

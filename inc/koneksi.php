@@ -1,6 +1,6 @@
 <?php
 try{
-$db = new PDO('mysql:host=localhost;dbname=dbkafekebunkopi','root','');}
+$db = new PDO('mysql:host=localhost;dbname=dbtoko','root','');}
 catch(PDOException $e)
 {
 print ("Tidak bisa terhubung ke server. Silahkan hubungi administrator.\n");

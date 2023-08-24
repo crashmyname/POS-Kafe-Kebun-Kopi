@@ -2,7 +2,7 @@
 session_start();
 
 function koneksi(){
-    $db = new PDO('mysql:host=localhost;dbname=dbkafekebunkopi','root','');
+    $db = new PDO('mysql:host=localhost;dbname=dbtoko','root','');
     return $db;
 }
 
@@ -84,20 +84,30 @@ function finishtransaksi($data){
     $user = $data['nm_user'];
     $menu = $data['menu'];
     $hrg = $data['hrg'];
+    $alamat = $data['alamat'];
     $jml = $data['jml'];
-    $totalharga = $data['totalharga'];
+    // $totalharga = $data['totalharga'];
     $date = $data['time'];
-    $meja = $data['meja'];
+    // $meja = $data['meja'];
+    $provinsi = $data['provinsi2'];
+    $kabupaten = $data['kabupaten2'];
+
+    $kurir = $data['kurir'] ." - ". $data['service'];
+    $berat = $data['berat'];
+
+    $ongkir = $data['ongkir2'];
+
+    $total_bayar = $data['total_bayar']+$ongkir;
     // $img1 = $data['foto1'];
     $image = $_FILES['foto']['name'];
     $image1 = $_FILES['foto']['tmp_name'];
     $dirUpload = "admin/img/produk/";
     $uploadData = move_uploaded_file($image1, $dirUpload.$image);
-    $queryPesanan = $db->prepare("INSERT INTO tb_pesanan values ('','$id','$meja','$totalharga','$date')");
+    $queryPesanan = $db->prepare("INSERT INTO tb_pesanan values ('','$id','$meja','$total_bayar','$date')");
     $queryPesanan->execute();
         $idPesanan = $db->lastInsertId();
         // $total = 0;
-    foreach($_SESSION['keranjang'] as $idmenu=>$value){
+        foreach($_SESSION['keranjang'] as $idmenu=>$value){
             $queryProduk = $db->prepare("SELECT * FROM tb_menu where id_menu='$idmenu'");
             $queryProduk->execute();
             $produk = $queryProduk->fetch();
@@ -117,20 +127,14 @@ function finishtransaksi($data){
         unset($_SESSION['keranjang']);
         echo "<script>alert('Transaksi Berhasil');</script>";
         echo "<script>document.location='index.php';</script>";
-        // header('location:index.php');
-        // var_dump($queryItem);
-        // var_dump($queryItems);
-        // var_dump($queryPesanan);
-        // print_r($queryItem);
-        // print_r($queryPesanan);
-        
+
     if($uploadData){
         // $sql = "INSERT INTO tb_pemesanan values ('','$id','$user','$meja','$menu','$hrg','$jml','$tothrg','$date','Pending','$image')";
-        $sql = "INSERT INTO tb_pembayaran values ('','$idPesanan',now(),'$totalharga','$user','Pending','$image')";
+        $sql = "INSERT INTO tb_pembayaran values ('','$idPesanan',now(),'$alamat','$provinsi','$kabupaten','$kurir','$ongkir','$total_bayar','$user','Pending','$image')";
         $transaksi = $db->prepare($sql);
         $transaksi->execute();
-        $meja = $db->prepare("UPDATE tb_meja set statusmeja='Booking' where id_meja='$meja'");
-        $meja->execute();
+        // $meja = $db->prepare("UPDATE tb_meja set statusmeja='Booking' where id_meja='$meja'");
+        // $meja->execute();
         // var_dump($transaksi);
     }else{
         echo "Gagal simpan";

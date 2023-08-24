@@ -30,7 +30,8 @@ if(isset($_POST['signup'])){
     <div class="col-lg-5 col-12">
         <div id="auth-left">
             <div class="auth-logo">
-                <a href="index.php"><img src="admin/img/logokebunkopi.svg" alt="Logo"></a>
+                <a href="index.php">TOKO SINAR MALINPING</a>
+                <!-- TOKO SINAR MALINPING -->
             </div>
             <h1 class="auth-title">Sign Up</h1>
             <p class="auth-subtitle mb-2">Input your data to register to our website.</p>

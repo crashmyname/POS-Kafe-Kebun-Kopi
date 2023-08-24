@@ -14,7 +14,7 @@ if(isset($_POST['login'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Admin Dashboard</title>
+    <title>Login - Admin Toko Sinar Malingping</title>
     <link rel="stylesheet" href="assets/css/main/app.css">
     <link rel="stylesheet" href="assets/css/pages/auth.css">
     <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon">
@@ -27,7 +27,7 @@ if(isset($_POST['login'])){
     <div class="col-lg-5 col-12">
         <div id="auth-left">
             <div class="auth-logo">
-                <a href="index.php"><img src="img/logokebunkopi.svg" alt="Logo"></a>
+                <a href="index.php">TOKO SINAR MALINGPING</a>
             </div>
             <h1 class="auth-title">Log in.</h1>
             <p class="auth-subtitle mb-3">Log in administrator.</p>

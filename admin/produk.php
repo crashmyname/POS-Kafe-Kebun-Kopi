@@ -127,25 +127,6 @@ if(isset($_POST['updates'])){
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <label>Kategori</label>
-                                                                    </div>
-                                                                    <div class="col-md-8 form-group">
-                                                                        <select type="text" name="kategori"
-                                                                            id="kategori" class="form-control" required>
-                                                                            <option value="">-- Pilih --</option>
-                                                                            <?php
-                                                                                $sql = "SELECT * FROM tb_kategori";
-                                                                                $result = $db->prepare($sql);
-                                                                                $result->execute();
-                                                                                while($data = $result->fetch()){
-                                                                                ?>
-                                                                            <option value="<?= $data['id_kategori']?>">
-                                                                                <?= $data['nama_kategori']?>
-                                                                            </option>
-                                                                            <?php }; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-4">
                                                                         <label>Harga</label>
                                                                     </div>
                                                                     <div class="col-md-8 form-group">
@@ -215,7 +196,7 @@ if(isset($_POST['updates'])){
                                     <th>No</th>
                                     <th>Nama Produk</th>
                                     <th>Jenis</th>
-                                    <th>Kategori</th>
+                                    <!-- <th>Kategori</th> -->
                                     <th>Harga</th>
                                     <th>Stock</th>
                                     <th width="250px">Foto 1</th>
@@ -225,7 +206,7 @@ if(isset($_POST['updates'])){
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql = "SELECT * FROM tb_menu inner join tb_kategori on tb_menu.id_kategori = tb_kategori.id_kategori order by id_menu asc";
+                                    $sql = "SELECT * FROM tb_menu order by id_menu asc";
                                     $hasil = $db->prepare($sql);
                                     $hasil->execute();
                                     $no =1;
@@ -235,7 +216,7 @@ if(isset($_POST['updates'])){
                                     <th><?= $no?></th>
                                     <th><?= $data['nama_menu']?></th>
                                     <th><?= $data['jenis']?></th>
-                                    <th><?= $data['nama_kategori']?></th>
+                                    <!-- <th><?= $data['nama_kategori']?></th> -->
                                     <th><?= $data['harga']?></th>
                                     <th><?= $data['stock_menu']?></th>
                                     <th><?= "<img src='img/produk/$data[foto_menu1]' class='rounded' width='50%'>"?>
@@ -304,40 +285,13 @@ if(isset($_POST['updates'])){
                                                                                                 class="form-control"
                                                                                                 required>
                                                                                                 <option value="<?= $data['jenis']?>"><?= $data['jenis']?></option>
-                                                                                                <option value="Ice">Ice
+                                                                                                <option value="Garing">Garing
                                                                                                 </option>
-                                                                                                <option value="Hot">Hot
+                                                                                                <option value="Berat">Berat
                                                                                                 </option>
                                                                                             </select>
                                                                                         </div>
-                                                                                        <div class="col-md-4">
-                                                                                            <label>Kategori</label>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="col-md-8 form-group">
-                                                                                            <div class="col-sm-8">
-                                                                                                <select type="text"
-                                                                                                    name="kategori"
-                                                                                                    id="kategori"
-                                                                                                    class="form-control">
-                                                                                                    <option
-                                                                                                        value="<?= $data['id_kategori']?>">
-                                                                                                        <?= $data['nama_kategori']?>
-                                                                                                    </option>
-                                                                                                    <?php
-                                                                                $sql = "SELECT * FROM tb_kategori";
-                                                                                $results = $db->prepare($sql);
-                                                                                $results->execute();
-                                                                                while($datas = $results->fetch()){
-                                                                                ?>
-                                                                                                    <option
-                                                                                                        value="<?= $datas['id_kategori']?>">
-                                                                                                        <?= $datas['nama_kategori']?>
-                                                                                                    </option>
-                                                                                                    <?php }; ?>
-                                                                                                </select>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                        
                                                                                         <div class="col-md-4">
                                                                                             <label>Harga</label>
                                                                                         </div>

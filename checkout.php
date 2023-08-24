@@ -40,14 +40,14 @@ $s = $user->fetch();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kebun Kopi</title>
+    <title>TOKO SINAR MALINGPING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="admin/asset/css/main/app.css">
     <link rel="stylesheet" href="admin/assets/css/shared/iconly.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="admin/img/kebunkopi.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="admin/img/kebunkopi.png">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="admin/img/kebunkopi.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="admin/img/kebunkopi.png"> -->
     <!-- <link href="template/public/assets/css/theme.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href="admin/assets/extensions/sweetalert2/sweetalert2.min.css">
 </head>
@@ -56,8 +56,8 @@ $s = $user->fetch();
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg bg-transparen">
             <div class="container-fluid">
-                <img src="admin/img/kebunkopi.png" alt="" width="60px">
-                <a class="navbar-brand" href="index.php">Kafe Kebun Kopi</a>
+                <!-- <img src="admin/img/kebunkopi.png" alt="" width="60px"> -->
+                <a class="navbar-brand" href="index.php">TOKO SINAR MALINGPING</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -68,27 +68,12 @@ $s = $user->fetch();
                         <div class="mx-auto pt-5 pt-lg-0 d-block d-lg-none d-xl-block">
                             <p class="mb-0 fw-bold text-lg-center">Lokasi: <i
                                     class="fas fa-map-marker-alt text-warning mx-2"></i><span
-                                    class="fw-normal">Jl parahu, RT 004 RW 004. &nbsp</span><span>Kp. Parahu Ds. Parahu Kec. Sukamulya</span></p>
+                                    class="fw-normal">Jln. Raya Malingping Km. 4 Kec. Malingping, Kab. Lebak, Prov. Banten 42391.</span></p>
                         </div>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             <i class="bi bi-cart4"></i><span class="badge bg-transparent">
-                                <?php
-                                // $ss = $_SESSION['user'];
-                                // $akun = $db->prepare("SELECT * FROM tb_user where username='$ss'");
-                                // $akun->execute();
-                                // $ak = $akun->fetch();
-                                // $s1 = $ak['id_user'];
-                                // $s = $ak['nm_user'];
-                                // $sql = "SELECT * FROM tb_pemesanan where nm_user='$s'";
-                                // $rs = $db->prepare($sql);
-                                // $rs->execute();
-                                // $cart = $rs->rowCount();
-                                // $cart1 = $rs->fetch();
-                                // echo $cart;
-                                ?>
-
                                 <?php 
 							if(isset($_SESSION['keranjang'])){
 								echo $keranjan = count($_SESSION['keranjang']);
@@ -128,32 +113,25 @@ $s = $user->fetch();
                                                                     <table class="table mb-0">
                                                                         <thead class="thead-dark">
                                                                             <tr>
-                                                                                <!-- <th>Invoice</th> -->
                                                                                 <th>Nama Menu</th>
                                                                                 <th>Harga</th>
-                                                                                <!-- <th>Pilih Meja</th> -->
-                                                                                <!-- <th>Jumlah</th> -->
-                                                                                <!-- <th>Total Harga</th> -->
                                                                                 <th>Opsi</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php 
-                                                                        // $pesan = $db->prepare("SELECT * FROM tb_pemesanan where nm_user='$s'");
-                                                                        // $pesan->execute();
-                                                                        // while($c = $pesan->fetch()){
                                                                             $total = 0;
                                                                             if(!!isset($_SESSION['keranjang'])){
                                                                                 $keranjang = count($_SESSION['keranjang']);
                                                                                 if($keranjang != 0){
                                                                                     $pesanan = 'SELECT * FROM tb_menu where id_menu in(';
-                                                $idmenu = array_keys($_SESSION['keranjang']);
-                                                $pesanan .= trim(str_repeat('?,',count($idmenu)),',');
-                                                $pesanan .= ')';
-                                                $sql = $db->prepare($pesanan);
-                                                $sql->execute($idmenu);
-                                                while($menu = $sql->fetch()){
-                                                                        ?>
+                                                                                $idmenu = array_keys($_SESSION['keranjang']);
+                                                                                $pesanan .= trim(str_repeat('?,',count($idmenu)),',');
+                                                                                $pesanan .= ')';
+                                                                                $sql = $db->prepare($pesanan);
+                                                                                $sql->execute($idmenu);
+                                                                                while($menu = $sql->fetch()){
+                                                                                                        ?>
                                                                             <tr>
                                                                                 <td>
                                                                                     <?= $menu['nama_menu']?></td>
@@ -198,11 +176,6 @@ $s = $user->fetch();
                                 </div>
                             </div>
                         </div>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success me-2 btn-md" type="submit"><i
-                                    class="bi bi-search"></i></button>
-                        </form>
                         <!-- Button trigger for login form modal -->
                         <?php 
                         if(empty($_SESSION['user'])){ ?>
@@ -287,6 +260,7 @@ $s = $user->fetch();
     </div>
 
     <!-- ini isi body checkout -->
+    
     <hr>
     <div class="container-fluid">
         <div class="container-fluid">
@@ -341,30 +315,6 @@ $s = $user->fetch();
                                                 $sql->execute($idmenu);
                                                 while($menu = $sql->fetch()){
                                                     $total += $menu['harga']*$_SESSION['keranjang'][$menu['id_menu']];
-                                                // $jumlah_total = 0;
-												// $total = 0;
-												// for($a = 0; $a < $keranjang; $a++){
-												// 	$idm = $_SESSION['keranjang'][$a]['tb_menu'];
-												// 	$jml = $_SESSION['keranjang'][$a]['jumlah'];
-                                                //     $isi = $db->prepare("SELECT * FROM tb_menu where id_menu='$idm'");
-                                                //     $isi->execute();
-                                                //     $i = $isi->fetch();
-
-												// 	$total += $i['harga']*$jml;
-												// 	$jumlah_total += $total;
-												// 	$data = $i['stock_menu'];
-												// 	// $jumlahp = $i['produk_jumlah'];
-												// 	$pengurangan = (int)$data-(int)$jml;
-													
-												// 	if($jml>$data){
-												// 		echo "<script>alert('Jumlah stock yang anda masukkan melebihi stock toko kami')</script><script>document.location='keranjang.php';</script>";
-												// 	} else {
-                                                //         $sent = $db->prepare("UPDATE tb_menu set stock_menu='$pengurangan' where id_menu='$idm'");
-                                                //         $sent->execute();
-												// 	}
-                                            // $pesanan = $db->prepare("SELECT * FROM tb_pemesanan inner join tb_meja on tb_meja.id_meja = tb_pemesanan.id_meja where nm_user='$s'");
-                                            // $pesanan->execute();
-                                            // while($ps = $pesanan->fetch()){
                                             ?>
                                                 <tr>
                                                     <td class="text-bold-500"><input type="hidden" name="uuid[]" value="<?= $menu['id_menu']?>">
@@ -492,14 +442,14 @@ $s = $user->fetch();
                                         </div>
                                             </div>
                         <button type="button" class="btn btn-primary me-auto float-end mb-2 mt-2" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal1">
+                            data-bs-target="#exampleModal2">
                             <i class="bi bi-cart4">Finish Transaksi</i><span class="badge bg-transparent">
                             </span>
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg transparen">
+                            <div class="modal-dialog modal-xl transparen">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Bukti Transaksi</h1>
@@ -526,7 +476,13 @@ $s = $user->fetch();
                                                                     <table class="table mb-0">
                                                                         <thead class="thead-dark">
                                                                             <tr>
-                                                                                <th>Pilih Meja</th>
+                                                                                <!-- <th>Pilih Meja</th> -->
+                                                                                <th>Nama</th>
+                                                                                <th>Alamat</th>
+                                                                                <th>Provinsi</th>
+                                                                                <th>Kabupaten</th>
+                                                                                <th>Total Berat</th>
+                                                                                <th>Ongkir</th>
                                                                                 <th>Upload Transaksi</th>
                                                                                 <th>Total Harga</th>
                                                                             </tr>
@@ -534,48 +490,76 @@ $s = $user->fetch();
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td><input type="hidden" name="uid" value="<?= $s['id_user']?>">
-                                                                                <input type="hidden" name="nm_user" value="<?= $s['nm_user']?>">
+                                                                                <input type="text" class="form-control" name="nm_user" value="<?= $s['nm_user']?>" readonly>
                                                                                 <?php
-                                                $ps = 'SELECT * FROM tb_menu where id_menu in(';
-                                                $idmenu = array_keys($_SESSION['keranjang']);
-                                                $ps .= trim(str_repeat('?,',count($idmenu)),',');
-                                                $ps .= ')';
-                                                $sql = $db->prepare($ps);
-                                                $sql->execute($idmenu);
-                                                while($menu = $sql->fetch()){
-                                                    // $total += $menu['harga']*$_SESSION['keranjang'][$menu['id_menu']];
-                                                    ?>
+                                                                                $ps = 'SELECT * FROM tb_menu where id_menu in(';
+                                                                                $idmenu = array_keys($_SESSION['keranjang']);
+                                                                                $ps .= trim(str_repeat('?,',count($idmenu)),',');
+                                                                                $ps .= ')';
+                                                                                $sql = $db->prepare($ps);
+                                                                                $sql->execute($idmenu);
+                                                                                while($menu = $sql->fetch()){
+                                                                                    // $total += $menu['harga']*$_SESSION['keranjang'][$menu['id_menu']];
+                                                                                    ?>
                                                                                 <input type="hidden" name="menu[]" value="<?= $menu['id_menu']?>">
                                                                                 <input type="hidden" name="hrg[]" value="<?= $menu['harga']?>">
                                                                                 <input type="hidden" name="jml[<?= $menu['id_menu']?>]" value="<?= $_SESSION['keranjang'][$menu['id_menu']]?>">
                                                                                 <input type="hidden" name="totalharga" value="<?= $total?>">
                                                                                 <input type="hidden" name="time" value="<?php 
-date_default_timezone_set('Asia/Jakarta'); // Zona Waktu indonesia
-echo date('Y-m-d  H:i:s'); // menampilkan jam sekarang">?>">
-                                                                                <?php } ?>
-                                                                                    <select
-                                                                                        type="text" name="meja"
-                                                                                        id="kategori"
-                                                                                        class="form-control" required>
-                                                                                        <?php 
-                                                                        $meja = $db->prepare("SELECT * FROM tb_meja where statusmeja ='Available'");
-                                                                        $meja->execute();
-                                                                        while($m = $meja->fetch()){
-                                                                        ?>
-                                                                                        <option
-                                                                                            value="<?= $m['id_meja']?>">
-                                                                                            <?= $m['no_meja']?></option>
-                                                                                        <?php } ;?>
-                                                                                    </select></td>
+                                                                                date_default_timezone_set('Asia/Jakarta'); // Zona Waktu indonesia
+                                                                                echo date('Y-m-d  H:i:s'); // menampilkan jam sekarang">?>">
+                                                                                
+                                                                                   </td>
+                                                                                   <td><textarea name="alamat" id="" cols="30" class="form-control" rows="4"></textarea></td>
+                                                                                   <?php 
+                                                                                    $curl = curl_init();
+
+                                                                                    curl_setopt_array($curl, array(
+                                                                                        CURLOPT_URL => "http://api.rajaongkir.com/starter/province",
+                                                                                        CURLOPT_RETURNTRANSFER => true,
+                                                                                        CURLOPT_ENCODING => "",
+                                                                                        CURLOPT_MAXREDIRS => 10,
+                                                                                        CURLOPT_TIMEOUT => 30,
+                                                                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                                                                        CURLOPT_CUSTOMREQUEST => "GET",
+                                                                                        CURLOPT_HTTPHEADER => array(
+                                                                                            "key: 8f22875183c8c65879ef1ed0615d3371"
+                                                                                        ),
+                                                                                    ));
+
+                                                                                    $response = curl_exec($curl);
+                                                                                    $err = curl_error($curl);
+                                                                                    $data_provinsi = json_decode($response, true);
+                                                                                    ?>
+                                                                                <td class=""><select name="provinsi" id="provinsi" class="form-control">
+                                                                                    <option value="">Pilih Provinsi Tujuan</option>
+                                                                                    <?php 
+                                                                                    for ($i=0; $i < count($data_provinsi['rajaongkir']['results']); $i++) {
+                                                                                        echo "<option value='".$data_provinsi['rajaongkir']['results'][$i]['province_id']."'>".$data_provinsi['rajaongkir']['results'][$i]['province']."</option>";
+                                                                                    }
+                                                                                    ?>
+                                                                                </select></td>
+                                                                                <td class=""><select name="kabupaten" id="kabupaten" class="form-control">
+                                                                                    <!-- <option value=""></option> -->
+                                                                                </select></td>
+                                                                                <td class=""><input type="text" class="form-control" name="jml[<?= $menu['id_menu']?>]" value="<?= $_SESSION['keranjang'][$menu['id_menu']]*$menu['produk_berat']?> Gram"></td>
+                                                                                <input name="kurir" id="kurir" value="" required="required" type="hidden">
+                                                                                <input name="ongkir2" id="ongkir2" value="" required="required" type="hidden">
+                                                                                <input name="service" id="service" value="" required="required" type="hidden">
+
+                                                                                <input name="provinsi2" id="provinsi2" value="" required="required" type="hidden"> 
+                                                                                <input name="kabupaten2" id="kabupaten2" value="" required="required" type="hidden"> 
+
+
+                                                                                <div id="ongkir"></div>
+                                                                                <input name="berat" id="berat2" value="<?php echo $menu['produk_berat'] ?>" type="hidden">
+
+                                                                                <td><span id="tampil_ongkir"><?php echo "Rp. 0 ,-"; ?></span></td>
                                                                                 <td class="text-bold-500"><input class="form-control" type="file"
-                                                                            id="formFile" name="foto"></td>
-                                                                                <td class="text-bold-500"><?php
-                                                                                    // $totals = $db->query("SELECT SUM(total_harga) AS total_harga FROM tb_pemesanan where nm_user='$s'");
-                                                                                    // $totals->execute();
-                                                                                    // $ts = $totals->fetch(PDO::FETCH_ASSOC);
-                                                                                    // echo "Rp.".number_format($ts['total_harga'],2,',','.');
-                                                                                    echo "Rp.".number_format($total,2,',','.');
-                                                                                ?></td>
+                                                                                id="formFile" name="foto" required></td>
+                                                                                <td class="text-bold-500"><span id="tampil_total"><?php echo "Rp. ".number_format($total) . " ,-"; ?></td>
+                                                                                <input type="hidden" name="total_bayar" id="total_bayar" value="<?= $total; ?>">
+                                                                                <?php } ?>
                                                                     
                                                                             </tr>
                                                                         </tbody>
@@ -666,7 +650,7 @@ echo date('Y-m-d  H:i:s'); // menampilkan jam sekarang">?>">
                         <p><i class="fas fa-home me-3 text-secondary"></i> BITUNG</p>
                         <p>
                             <i class="fas fa-envelope me-3 text-secondary"></i>
-                            ojosmantap@gmail.com
+                            <!-- ojosmantap@gmail.com -->
                         </p>
                         <p><i class="fas fa-phone me-3 text-secondary"></i> + 0821 2346 7288</p>
                         <p><i class="fas fa-print me-3 text-secondary"></i> + 0821 2345 6789</p>
@@ -692,6 +676,118 @@ echo date('Y-m-d  H:i:s'); // menampilkan jam sekarang">?>">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="jquery.zoom.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script>
+
+	$(document).ready(function(){
+
+		function numberWithCommas(x) {
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		$('.jumlah').on("keyup",function(){
+			// var nomor = $(this).attr('nomor');
+
+			var jml = $(this).val();
+
+			var hrg = $("#harga_"+nomor).val();
+
+			var total = jml*hrg;
+
+			var t = numberWithCommas(total);
+
+			$("#total_"+nomor).text("Rp. "+t+" ,-");
+		});
+	});
+
+	$(document).ready(function(){
+		$('#provinsi').change(function(){
+			var prov = $('#provinsi').val();
+
+
+			var provinsi = $("#provinsi :selected").text();
+
+			$.ajax({
+				type : 'GET',
+				url : 'inc/cek_kabupaten.php',
+				data :  'prov_id=' + prov,
+				success: function (data) {
+					$("#kabupaten").html(data);
+					$("#provinsi2").val(provinsi);
+				}
+			});
+		});
+
+		$(document).on("change","#kabupaten",function(){
+
+			var asal = 152;
+			var kab = $('#kabupaten').val();
+			var kurir = "a";
+			var berat = $('#berat2').val();
+
+			var kabupaten = $("#kabupaten :selected").text();
+
+			$.ajax({
+				type : 'POST',
+				url : 'inc/cek_ongkir.php',
+				data :  {'kab_id' : kab, 'kurir' : kurir, 'asal' : asal, 'berat' : berat},
+				success: function (data) {
+					$("#ongkir").html(data);
+					// alert(data);
+
+					// $("#provinsi").val(prov);
+					$("#kabupaten2").val(kabupaten);
+
+				}
+			});
+		});
+
+		function format_angka(x) {
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		$(document).on("change", '.pilih-kurir', function(event) { 
+			// alert("new link clicked!");
+			var kurir = $(this).attr("kurir");
+			var service = $(this).attr("service");
+			var ongkir = $(this).attr("harga");
+			var total_bayar = $("#total_bayar").val();
+
+			$("#kurir").val(kurir);
+			$("#service").val(service);
+			$("#ongkir2").val(ongkir);
+			var total = parseInt(total_bayar) + parseInt(ongkir);
+			$("#tampil_ongkir").text("Rp. "+ format_angka(ongkir) +" ,-");
+			$("#tampil_total").text("Rp. "+ format_angka(total) +" ,-");
+		});
+
+
+		// $(".pilih-kurir").on("change",function(){
+
+		// 	alert('sd');
+			// var asal = 152;
+			// var kab = $('#kabupaten').val();
+			// var kurir = "a";
+			// var berat = $('#berat2').val();
+
+			// $.ajax({
+			// 	type : 'POST',
+			// 	url : 'rajaongkir/cek_ongkir.php',
+			// 	data :  {'kab_id' : kab, 'kurir' : kurir, 'asal' : asal, 'berat' : berat},
+			// 	success: function (data) {
+			// 		$("#ongkir").html(data);
+			// 		// alert(data);
+
+			// 	}
+			// });
+		// });
+
+
+
+	});
+</script>
     <!-- <script src="admin/assets/js/bootstrap.js"></script>
     <script src="admin/assets/js/app.js"></script> -->
 </body>

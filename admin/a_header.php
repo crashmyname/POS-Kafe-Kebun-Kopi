@@ -26,8 +26,6 @@ $user = $adminuser->fetch();
         echo 'Dashboard';
         }else if($page=='Kategori'){
             echo 'Menu Kategori';
-        }else if($page=='Meja'){
-            echo 'Menu Meja';
         }else if($page=='Produk'){
             echo 'Menu Produk';
         }else if($page=='Customer'){
@@ -57,7 +55,7 @@ $user = $adminuser->fetch();
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="img/logokebunkopi.svg" alt="Logo" width=100px srcset=""></a>
+                            <a href="index.html">S M.</a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -104,24 +102,10 @@ $user = $adminuser->fetch();
                             </a>
                         </li>
 
-                        <li <?php if($page == "Kategori") echo 'class="sidebar-item active"';?>>
-                            <a href="kategori.php" class='sidebar-link'>
-                                <i class="bi bi-folder-fill"></i>
-                                <span>Data Kategori</span>
-                            </a>
-                        </li>
-
                         <li <?php if($page == "Produk") echo 'class="sidebar-item active"';?>>
                             <a href="produk.php" class='sidebar-link'>
                                 <i class="bi bi-file-fill"></i>
                                 <span>Data Produk</span>
-                            </a>
-                        </li>
-
-                        <li <?php if($page == "Meja") echo 'class="sidebar-item active"';?>>
-                            <a href="meja.php" class='sidebar-link'>
-                                <i class="bi bi-tablet-landscape-fill"></i>
-                                <span>Data Meja</span>
                             </a>
                         </li>
 
